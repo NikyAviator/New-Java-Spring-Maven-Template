@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS "books";
 DROP TABLE IF EXISTS "authors";
 
-CREATE SEQUENCE authors_id_seq;
+CREATE SEQUENCE IF NOT EXISTS authors_id_seq;
 
 CREATE TABLE "authors" (
 "id" bigint DEFAULT nextval('authors_id_seq') NOT NULL,
