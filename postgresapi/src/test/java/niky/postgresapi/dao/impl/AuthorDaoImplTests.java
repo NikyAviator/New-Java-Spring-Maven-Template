@@ -1,4 +1,4 @@
-package niky.postgresapi.dao;
+package niky.postgresapi.dao.impl;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import niky.postgresapi.dao.impl.AuthorDaoImpl;
 import niky.postgresapi.domain.Author;
 
 // Unit tests with JUnit 5 and Mockito

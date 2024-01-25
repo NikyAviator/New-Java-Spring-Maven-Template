@@ -1,4 +1,4 @@
-package niky.postgresapi.dao;
+package niky.postgresapi.dao.impl;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import niky.postgresapi.dao.impl.BookDaoImpl;
 import niky.postgresapi.domain.Book;
 
 @ExtendWith(MockitoExtension.class)
