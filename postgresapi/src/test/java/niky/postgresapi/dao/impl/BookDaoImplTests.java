@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import niky.postgresapi.TestDataUtil;
 import niky.postgresapi.domain.Book;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,17 +26,17 @@ public class BookDaoImplTests {
   
   @Test
   public void testThatCreateBookGeneratesCorrectSql() {
-    Book book = Book.builder().isbn("978-1-2345-6789-0").title("The Shadow in the Attic.").authorId(1L).build();
+    Book book = TestDataUtil.createTestBook();
 
     underTest.create(book);
 
     verify(jdbcTemplate).update(
-        eq("INSERT INTO books (isbn, title, authorId) VALUES (?, ?, ?)"),
+        eq("INSERT INTO books (isbn, title, author_id) VALUES (?, ?, ?)"),
         eq("978-1-2345-6789-0"),
         eq("The Shadow in the Attic."),
         eq(1L));
   }
-  
+
   @Test
   public void testThatFindOneBookGeneratesCorrectSql() {
     underTest.find("978-1-2345-6789-0");
