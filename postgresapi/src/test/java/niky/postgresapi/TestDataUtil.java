@@ -10,7 +10,7 @@ public final class TestDataUtil {
   }
 
   public static Author createTestAuthor() {
-    return Author.builder().id(1L).name("Abigail Rose").age(80).build();
+    return Author.builder().name("Abigail Rose").age(80).build();
   }
 
   public static Book createTestBook() {

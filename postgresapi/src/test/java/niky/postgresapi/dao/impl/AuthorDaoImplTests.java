@@ -33,10 +33,10 @@ public class AuthorDaoImplTests {
     underTest.create(author);
 
     verify(jdbcTemplate).update(
-        eq("INSERT INTO authors (id, name, age) VALUES (?, ?, ?)"),
-        eq(1L), eq("Abigail Rose"), eq(80));
-
-  }
+        eq("INSERT INTO authors (name, age) VALUES (?, ?)"), // Removed 'id'
+        eq("Abigail Rose"),
+        eq(80));
+}
 
   @Test
   public void testThatFindOneGeneratesCorrectSql() {

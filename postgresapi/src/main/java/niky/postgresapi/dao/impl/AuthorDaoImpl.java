@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -27,10 +26,15 @@ public class AuthorDaoImpl implements AuthorDao {
   @Override
   public void create(Author author) {
     jdbcTemplate.update(
-        "INSERT INTO authors (id, name, age) VALUES (?, ?, ?)",
-        author.getId(), author.getName(), author.getAge());
+        "INSERT INTO authors (name, age) VALUES (?, ?)",
+        author.getName(),
+        author.getAge());
 
-  }
+    Long generatedId = jdbcTemplate.queryForObject(
+        "SELECT currval('authors_id_seq')", Long.class);
+    author.setId(generatedId);
+}
+
   
   // FindOne Method
   @Override

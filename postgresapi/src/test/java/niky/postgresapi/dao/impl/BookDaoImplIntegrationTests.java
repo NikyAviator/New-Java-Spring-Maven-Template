@@ -5,8 +5,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-
 import niky.postgresapi.TestDataUtil;
 import niky.postgresapi.domain.Author;
 import niky.postgresapi.domain.Book;
@@ -29,8 +27,10 @@ public class BookDaoImplIntegrationTests {
   public void testThatBookCanBeCreatedAndRecalled() {
     Author author = TestDataUtil.createTestAuthor();
     authorDaoImpl.create(author);
+    // Assuming the create method or the Author object now has the generated ID
+    Long generatedAuthorId = author.getId();
     Book book = TestDataUtil.createTestBook();
-    book.setAuthorId(author.getId());
+    book.setAuthorId(generatedAuthorId);
     underTest.create(book);
     Optional<Book> result = underTest.find(book.getIsbn());
     assert (result).isPresent();
