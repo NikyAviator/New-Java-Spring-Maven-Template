@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import niky.postgresapi.dao.AuthorDao;
 import niky.postgresapi.domain.Author;
 
+@Repository
 public class AuthorDaoImpl implements AuthorDao {
   // we autowire the jdbctemplate to the class.
   // final = cannot be reinitialized after constructor. Easier to work with.

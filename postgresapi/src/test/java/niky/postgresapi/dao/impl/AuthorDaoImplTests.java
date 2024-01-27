@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import niky.postgresapi.TestDataUtil;
 import niky.postgresapi.domain.Author;
 
 // Unit tests with JUnit 5 and Mockito
@@ -27,7 +28,7 @@ public class AuthorDaoImplTests {
 
   @Test
   public void testThatCreateAuthorGeneratesCorrectSql() {
-    Author author = Author.builder().id(1L).name("Abigail Rose").age(80).build();
+    Author author = TestDataUtil.createTestAuthor();
 
     underTest.create(author);
 
@@ -36,7 +37,7 @@ public class AuthorDaoImplTests {
         eq(1L), eq("Abigail Rose"), eq(80));
 
   }
-  
+
   @Test
   public void testThatFindOneGeneratesCorrectSql() {
     underTest.findOne(1L);
