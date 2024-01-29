@@ -9,8 +9,16 @@ public final class TestDataUtil {
     
   }
 
-  public static Author createTestAuthor() {
+  public static Author createTestAuthorA() {
     return Author.builder().name("Abigail Rose").age(80).build();
+  }
+
+  public static Author createTestAuthorB() {
+    return Author.builder().name("Thomas Cronin").age(44).build();
+  }
+
+  public static Author createTestAuthorC() {
+    return Author.builder().name("Jesse Ventura").age(24).build();
   }
 
   public static Book createTestBook() {
