@@ -34,14 +34,22 @@ public class BookDaoImpl implements BookDao {
 
   // Find Method
   @Override
-  public Optional<Book> find(String isbn) {
-    List<Book>results =  jdbcTemplate.query(
-      "SELECT isbn, title, author_id FROM books WHERE isbn = ? LIMIT 1",
-      new BookRowMapper(),
-      isbn
+  public Optional<Book> findOne(String isbn) {
+    List<Book> results = jdbcTemplate.query(
+        "SELECT isbn, title, author_id FROM books WHERE isbn = ? LIMIT 1",
+        new BookRowMapper(),
+        isbn
 
     );
     return results.stream().findFirst();
+  }
+  // Find Many Method
+  @Override
+  public List<Book> find() {
+    return jdbcTemplate.query(
+        "SELECT isbn, title, author_id FROM books",
+        new BookRowMapper()
+    );
   }
 
   public static class BookRowMapper implements RowMapper<Book> {

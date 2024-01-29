@@ -1,5 +1,6 @@
 package niky.postgresapi.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import niky.postgresapi.domain.Book;
@@ -8,6 +9,8 @@ public interface BookDao {
 
   void create(Book book);
 
-  Optional<Book> find(String isbn);
+  Optional<Book> findOne(String isbn);
+
+  List<Book> find();
   
 }

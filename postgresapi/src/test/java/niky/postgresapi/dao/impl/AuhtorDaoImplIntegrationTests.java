@@ -8,14 +8,16 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import niky.postgresapi.TestDataUtil;
 import niky.postgresapi.domain.Author;
 
-
-@SpringBootTest
-// @DirtiesContext (classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) Han la till detta (check syntax if using), men:
+//Han la till detta (check syntax if using), men:
 // Jag har redan löst med med att ha unique id för varje test, så jag behöver inte rensa databasen (the context) efter varje test. 
+// När jag körde class testerna så bugga det, så jag la till DirtiesContext (classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) igen.
+@SpringBootTest
+@DirtiesContext (classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) 
 public class AuhtorDaoImplIntegrationTests {
 
   private AuthorDaoImpl underTest;
