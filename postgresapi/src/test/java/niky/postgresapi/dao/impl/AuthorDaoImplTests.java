@@ -42,12 +42,17 @@ public class AuthorDaoImplTests {
   public void testThatFindOneGeneratesCorrectSql() {
     underTest.findOne(1L);
     verify(jdbcTemplate).query(
-      eq("SELECT id, name, age FROM authors WHERE id = ? LIMIT 1"), 
-      ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any(),
-       eq(1L)
-    );
-    
-
+        eq("SELECT id, name, age FROM authors WHERE id = ? LIMIT 1"),
+        ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any(),
+        eq(1L));
+  }
+  
+  @Test
+  public void testThatFindManyGeneratesCorrectSql() {
+    underTest.find();
+    verify(jdbcTemplate).query(
+        eq("SELECT id, name, age FROM authors"),
+        ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any());
   }
 
 }

@@ -40,12 +40,18 @@ public class AuthorDaoImpl implements AuthorDao {
   @Override
   public Optional<Author> findOne(long authorId) {
     List<Author> results = jdbcTemplate.query(
-        "SELECT id, name, age FROM authors WHERE id = ? LIMIT 1", 
+        "SELECT id, name, age FROM authors WHERE id = ? LIMIT 1",
         new AuthorRowMapper(),
-        authorId
-    );
+        authorId);
     return results.stream().findFirst();
-    
+
+  }
+  // Find Many Method
+   @Override
+  public List<Author> find() {
+    return jdbcTemplate.query(
+        "SELECT id, name, age FROM authors",
+        new AuthorRowMapper());
   }
   
   public static class AuthorRowMapper implements RowMapper<Author> {
@@ -60,5 +66,7 @@ public class AuthorDaoImpl implements AuthorDao {
       }
     
   }
+
+ 
   
 }
