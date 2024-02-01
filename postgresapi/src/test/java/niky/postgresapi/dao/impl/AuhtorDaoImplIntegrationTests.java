@@ -54,4 +54,16 @@ public class AuhtorDaoImplIntegrationTests {
     assert (result).get(1).equals(authorB);
     assert (result).get(2).equals(authorC);
   }
+
+  @Test
+  public void testThatAuthorCanBeUpdated() {
+    Author authorA = TestDataUtil.createTestAuthorA();
+    underTest.create(authorA);
+    authorA.setName("UPDATED NAME");
+    underTest.update(authorA);
+    Optional<Author> result = underTest.findOne(authorA.getId());
+    assert (result.isPresent());
+    assert (result.get()).equals(authorA);
+
+  }
 }
