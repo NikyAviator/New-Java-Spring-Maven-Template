@@ -48,10 +48,20 @@ public class AuthorDaoImpl implements AuthorDao {
   }
   // Find Many Method
    @Override
-  public List<Author> find() {
-    return jdbcTemplate.query(
-        "SELECT id, name, age FROM authors",
-        new AuthorRowMapper());
+   public List<Author> find() {
+     return jdbcTemplate.query(
+         "SELECT id, name, age FROM authors",
+         new AuthorRowMapper());
+   }
+  
+   // Update Method
+  @Override
+  public void update( Author author) {
+    jdbcTemplate.update(
+        "UPDATE authors SET name = ?, age = ? WHERE id = ?",
+        author.getName(),
+        author.getAge(),
+        author.getId());
   }
   
   public static class AuthorRowMapper implements RowMapper<Author> {
