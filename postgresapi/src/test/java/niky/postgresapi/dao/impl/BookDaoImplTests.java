@@ -22,7 +22,7 @@ public class BookDaoImplTests {
 
   @InjectMocks
   private BookDaoImpl underTest;
-  
+
   @Test
   public void testThatCreateBookGeneratesCorrectSql() {
     Book book = TestDataUtil.createTestBookA();
@@ -44,12 +44,26 @@ public class BookDaoImplTests {
         ArgumentMatchers.<BookDaoImpl.BookRowMapper>any(),
         eq("978-1-2345-6789-0"));
   }
-  
+
   @Test
   public void testThatFindGeneratesCorrectSql() {
     underTest.find();
     verify(jdbcTemplate).query(
         eq("SELECT isbn, title, author_id FROM books"),
         ArgumentMatchers.<BookDaoImpl.BookRowMapper>any());
-  }  
+  }
+
+  @Test
+  public void testThatUpdateGeneratesCorrectSql() {
+    Book bookA = TestDataUtil.createTestBookA();
+    underTest.update("978-1-2345-6789-0", bookA);
+    verify(jdbcTemplate).update(
+        eq("UPDATE books SET isbn = ?, title = ?, author_id = ? WHERE isbn = ?"),
+        eq("978-1-2345-6789-0"),
+        eq("The Shadow in the Attic."),
+        eq(1L),
+        eq("978-1-2345-6789-0"));
+
+  }
+
 }
