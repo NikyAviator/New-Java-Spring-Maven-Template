@@ -56,12 +56,20 @@ public class AuthorDaoImpl implements AuthorDao {
   
    // Update Method
   @Override
-  public void update( Author author) {
+  public void update(Author author) {
     jdbcTemplate.update(
         "UPDATE authors SET name = ?, age = ? WHERE id = ?",
         author.getName(),
         author.getAge(),
         author.getId());
+  }
+  
+  // Delete Method
+  @Override
+  public void delete(long authorId) {
+    jdbcTemplate.update(
+        "DELETE FROM authors WHERE id = ?",
+        authorId);
   }
   
   public static class AuthorRowMapper implements RowMapper<Author> {
