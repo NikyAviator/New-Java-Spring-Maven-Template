@@ -3,18 +3,21 @@ package niky.postgresapi.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import jakarta.transaction.Transactional;
 import niky.postgresapi.TestDataUtil;
 import niky.postgresapi.domain.Author;
 import niky.postgresapi.domain.Book;
 
 // Transactional: This will ensure that each test is run in a transaction, which is rolled back at the end of the test, keeping your database state clean for each test.
+// @DirtiesContext (classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) 
 @SpringBootTest
-@DirtiesContext (classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD) 
+@Transactional
 public class BookRepositoryIntegrationTests {
 
   private BookRepository underTest;
